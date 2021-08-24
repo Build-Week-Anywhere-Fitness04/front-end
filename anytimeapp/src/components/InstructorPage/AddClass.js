@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import dummyData from '../../dummyData/dummyData'
 
 const initialClassFormValues = {
     theClassName: '',
@@ -11,10 +12,12 @@ const initialClassFormValues = {
 }
 
 
+export default function AddClass(props) {
 
-export default function AddClass() {
+    const { classes, setClasses } = props
 
     const [classFormValues, setClassFormValues] = useState(initialClassFormValues)
+    
 
     const classFormChange = evt => {
         const { name, value } = evt.target
@@ -24,10 +27,33 @@ export default function AddClass() {
         })
     }
 
+    const classFormSubmit = (evt) => {
+        
+        evt.preventDefault()
+
+        const newClass = {
+            id: classes.length + 1,
+            theClassName: classFormValues.theClassName.trim(),
+            classType: classFormValues.classType.trim(),
+            classStartTime: classFormValues.classStartTime.toString(),
+            classDuration: classFormValues.classDuration.toString(),
+            classIntensity: classFormValues.classIntensity,
+            classLocation: classFormValues.classLocation,
+            numberAttendees: 0,
+            maxClassSize: classFormValues.maxClassSize,
+        }
+
+        console.log(newClass)
+        const updatedClasses = ([newClass, ...classes])
+        setClasses(updatedClasses)
+        setClassFormValues(initialClassFormValues)
+        console.log(classes)
+    }
+
     return (
     <>
     <h2 className="mb-4 mt-6 text-center text-3xl font-extrabold text-gray-900">Create a New Class</h2>
-    <form>
+    <form onSubmit={classFormSubmit}>
       <div className="isolate -space-y-px rounded-md shadow-sm w-1/3 mx-auto">
         <div className="relative border border-gray-300 rounded-md rounded-b-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
           <label htmlFor="Class Name" className="block text-xs font-medium text-gray-700">
@@ -138,6 +164,8 @@ export default function AddClass() {
         </button>
       </div>
       </form>
+
+     
       </>
     )
   }
