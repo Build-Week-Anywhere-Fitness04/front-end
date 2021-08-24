@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Login from "./components/Login";
 
+
 function App() {
   return (
     <Router>
@@ -13,7 +14,6 @@ function App() {
             <Link to="/login">Login</Link>
           </div>
         </header>
-
         <Switch>
           <Route path="/login" component={Login} />
         </Switch>
