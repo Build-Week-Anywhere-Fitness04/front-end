@@ -1,4 +1,4 @@
-const initialClassesList = [
+export const initialClassesList = [
   {
     theClassName: "Beginner Yoga",
     classType: "Yoga",
@@ -30,5 +30,3 @@ const initialClassesList = [
     maxClassSize: "20",
   },
 ];
-
-export default initialClassesList;
