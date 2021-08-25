@@ -5,7 +5,12 @@ import * as yup from 'yup';
 import schema from './validation/schema';
 import Login from "./components/Login";
 import Registration from "./components/Registration";
+import ClassList from "./components/ClientPage/ClassList";
+import Settings from "./components/Settings";
+
 import PrivateRoute from "./components/PrivateRoute";
+import Home from "./components/Home";
+import { AuthProvider } from "./components/AuthContexts";
 
 function App() {
   // const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
@@ -18,40 +23,18 @@ function App() {
   // }
 
   return (
-    <Router>
-      <div className="App">
-        <header>
-          Anywhere Fitness
-          <div>
-            <ul>
-              <li>
-                <Link to="/registration">New User? Register Here!</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                {localStorage.getItem("token") && (
-                  <div>
-                    <Link to="/classes">Link to classes</Link>
-                  </div>
-                )}
-              </li>
-            </ul>
-          </div>
-          <div>
-            <Link to="/home">home</Link>
-          </div>
-        </header>
-
+    <AuthProvider>
+      <Router>
         <Switch>
           <PrivateRoute exact path="/classes" />
-          <Route path="/registration" component={Registration} />
-          <Route path="/login" component={Login} />
+          <Route path="/Registration" component={Registration} />
+          <Route path="/Home" component={Home} />
+          <Route path="/Settings" component={Settings} />
+          <Route path="/Class" component={ClassList} />
           <Route path="/" component={Login} />
         </Switch>
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
