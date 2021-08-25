@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { useAuth } from './AuthContexts'
+import { useAuth } from "./AuthContexts";
+import { auth } from "./Firebase";
 
 class Registration extends React.Component {
   state = {
@@ -23,27 +24,38 @@ class Registration extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.credentials === "") {
-      this.setState({
-        error: "Username or Password are not valid. Please try again",
+    console.log(this.state.credentials.username);
+    auth
+      .createUserWithEmailAndPassword(
+        this.state.credentials.username,
+        this.state.credentials.password
+      )
+      .then((res) => {
+        console.log(res);
+        this.props.history.push("/home");
       });
-    } else if (this.state.isTeacher === true) {
-      axios
-        .post("http://localhost:3001/api/user", this.state.credentials)
-        .then((res) => {
-          console.log(res.data);
-          localStorage.setItem("token", res.data.payload);
-          this.props.history.push("/login");
-        });
-    } else {
-      axios
-        .post("http://localhost:3001/api/user", this.state.credentials)
-        .then((res) => {
-          console.log(res.data);
-          localStorage.setItem("token", res.data.payload);
-          this.props.history.push("/login");
-        });
-    }
+
+    // if (this.state.credentials === "") {
+    //   this.setState({
+    //     error: "Username or Password are not valid. Please try again",
+    //   });
+    // } else if (this.state.isTeacher === true) {
+    //   axios
+    //     .post("http://localhost:5000/api/user", this.state.credentials)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       localStorage.setItem("token", res.data.payload);
+    //       this.props.history.push("/login");
+    //     });
+    // } else {
+    //   axios
+    //     .post("http://localhost:5000/api/user", this.state.credentials)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       localStorage.setItem("token", res.data.payload);
+    //       this.props.history.push("/login");
+    //     });
+    // }
   };
 
   render() {
@@ -75,8 +87,8 @@ class Registration extends React.Component {
               <form
                 className="space-y-6"
                 action="#"
-                method="POST"
-                onSubmit={this.login}
+                // method="POST"
+                onSubmit={this.handleSubmit}
               >
                 <div>
                   <label
@@ -263,7 +275,7 @@ class Registration extends React.Component {
           </div>
         </div>
       </h1>
-    )
+    );
   }
 }
 
