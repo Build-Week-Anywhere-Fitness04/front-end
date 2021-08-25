@@ -1,6 +1,7 @@
 import React from "react";
 
-import { initialClassesList } from "./dummyData/dummyData.js";
+// import { initialClassesList } from "./dummyData/dummyData.js";
+import initialClassesList from "../../dummyData/dummyData";
 
 export default function ClassList() {
   return (
