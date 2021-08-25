@@ -11,8 +11,9 @@ import Settings from "./components/Settings";
 
 import PrivateRoute from "./components/PrivateRoute";
 import Home from "./components/Home";
+import InstructorPage from './components/InstructorPage/InstructorPage';
 import { AuthProvider } from "./components/AuthContexts";
-import InstructorPage from "./components/InstructorPage/InstructorPage";
+
 
 // initialLoginErrors = {
 //   email: '',
@@ -33,6 +34,9 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/home" component={Home} />
+          <Route path ="/instructor" component={InstructorPage} />
           <PrivateRoute exact path="/classes" />
           <Route path="/Registration" component={Registration} />
           <Route path="/Home" component={Home} />

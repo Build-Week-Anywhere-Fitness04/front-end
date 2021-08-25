@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-
-const initialClassFormValues = {
-    theClassName: '',
-    classType: '',
-    classStartTime: '',
-    classDuration: '',
-    classIntensity: '',
-    classLocation: '',
-    maxClassSize: 0,
-}
+import dummyData from '../../dummyData/dummyData'
 
 
 
-export default function AddClass() {
 
-    const [classFormValues, setClassFormValues] = useState(initialClassFormValues)
+export default function AddClass(props) {
+
+    const { classes, setClasses, classFormValues, setClassFormValues, initialClassFormValues, isEditing, setIsEditing } = props
+
+   
+    
 
     const classFormChange = evt => {
         const { name, value } = evt.target
@@ -24,10 +19,33 @@ export default function AddClass() {
         })
     }
 
+    const classFormSubmit = (evt) => {
+        
+        evt.preventDefault()
+
+        const newClass = {
+            id: classes.length + 1,
+            theClassName: classFormValues.theClassName.trim(),
+            classType: classFormValues.classType.trim(),
+            classStartTime: classFormValues.classStartTime.toString(),
+            classDuration: classFormValues.classDuration.toString(),
+            classIntensity: classFormValues.classIntensity,
+            classLocation: classFormValues.classLocation,
+            numberAttendees: 0,
+            maxClassSize: classFormValues.maxClassSize,
+        }
+
+        
+        const updatedClasses = ([newClass, ...classes])
+        setClasses(updatedClasses)
+        setClassFormValues(initialClassFormValues)
+        
+    }
+
     return (
     <>
     <h2 className="mb-4 mt-6 text-center text-3xl font-extrabold text-gray-900">Create a New Class</h2>
-    <form>
+    <form onSubmit={classFormSubmit}>
       <div className="isolate -space-y-px rounded-md shadow-sm w-1/3 mx-auto">
         <div className="relative border border-gray-300 rounded-md rounded-b-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
           <label htmlFor="Class Name" className="block text-xs font-medium text-gray-700">
@@ -130,14 +148,23 @@ export default function AddClass() {
             placeholder="What is the maximum class size?"
           />
         </div>
-        <button
+        {!isEditing ? <button
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
          Create Class!
-        </button>
+        </button> : 
+        <button
+        onClick={() => {setIsEditing(false)}}
+        type="submit"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+     Update Class!
+    </button>}
       </div>
       </form>
+
+     
       </>
     )
   }
