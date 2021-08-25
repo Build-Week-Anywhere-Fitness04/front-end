@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { useAuth } from './AuthContexts'
 
 class Registration extends React.Component {
   state = {
@@ -181,6 +182,21 @@ class Registration extends React.Component {
                     </span>
                   </div>
                 </div>
+                <form
+                  className="space-y-6 my-5"
+                  action="#"
+                  method="POST"
+                  onSubmit={this.login}
+                >
+                  <div>
+                    <button
+                      type="submit"
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Google
+                    </button>
+                  </div>
+                </form>
 
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   <div>
@@ -209,7 +225,7 @@ class Registration extends React.Component {
                       href="#"
                       className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                     >
-                      <span className="sr-only">Sign in with Twitter</span>
+                      <span className="sr-only">Sign in with Google</span>
                       <svg
                         className="w-5 h-5"
                         aria-hidden="true"
