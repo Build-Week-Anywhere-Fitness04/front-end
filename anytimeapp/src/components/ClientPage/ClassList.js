@@ -1,40 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { SearchIcon} from '@heroicons/react/solid'
-
-
-const initialClassesList = [
-  {
-    theClassName: "Beginner Yoga",
-    classType: "Yoga",
-    classStartTime: "12:00 PM",
-    classDuration: "60",
-    classIntensity: "Easy",
-    classLocation: "GymA",
-    numberAttendees: "5",
-    maxClassSize: "10",
-  },
-  {
-    theClassName: "Advanced Yoga",
-    classType: "Yoga",
-    classStartTime: "2:00 PM",
-    classDuration: "60",
-    classIntensity: "Hard",
-    classLocation: "GymB",
-    numberAttendees: "7",
-    maxClassSize: "10",
-  },
-  {
-    theClassName: "Moderate Weight Training",
-    classType: "Weight Training",
-    classStartTime: "9:00 AM",
-    classDuration: "45",
-    classIntensity: "Moderate",
-    classLocation: "GymC",
-    numberAttendees: "12",
-    maxClassSize: "20",
-  },
-];
+import initialClassesList from '../../dummyData/dummyData'
 
 export default function ClassList() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -169,12 +136,7 @@ export default function ClassList() {
                       {classes.maxClassSize}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      {/* <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
-                        Edit
-                      </a> */}
+
                       <button type="button" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
   Reserve Class
 </button>
