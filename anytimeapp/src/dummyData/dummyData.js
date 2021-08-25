@@ -1,5 +1,6 @@
 const initialClassesList = [
   {
+    id: 1,
     theClassName: "Beginner Yoga",
     classType: "Yoga",
     classStartTime: "12:00 PM",
@@ -10,6 +11,7 @@ const initialClassesList = [
     maxClassSize: 10,
   },
   {
+    id: 2,
     theClassName: "Advanced Yoga",
     classType: "Yoga",
     classStartTime: "2:00 PM",
@@ -20,6 +22,7 @@ const initialClassesList = [
     maxClassSize: 10,
   },
   {
+    id: 3,
     theClassName: "Moderate Weight Training",
     classType: "Weight Training",
     classStartTime: "9:00 AM",
