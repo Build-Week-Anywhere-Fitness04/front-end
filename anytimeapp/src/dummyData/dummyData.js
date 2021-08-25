@@ -6,8 +6,8 @@ const initialClassesList = [
     classDuration: "60",
     classIntensity: "Easy",
     classLocation: "GymA",
-    numberAttendees: "5",
-    maxClassSize: "10",
+    numberAttendees: 5,
+    maxClassSize: 10,
   },
   {
     theClassName: "Advanced Yoga",
@@ -16,8 +16,8 @@ const initialClassesList = [
     classDuration: "60",
     classIntensity: "Hard",
     classLocation: "GymB",
-    numberAttendees: "7",
-    maxClassSize: "10",
+    numberAttendees: 7,
+    maxClassSize: 10,
   },
   {
     theClassName: "Moderate Weight Training",
@@ -26,8 +26,8 @@ const initialClassesList = [
     classDuration: "45",
     classIntensity: "Moderate",
     classLocation: "GymC",
-    numberAttendees: "12",
-    maxClassSize: "20",
+    numberAttendees: 12,
+    maxClassSize: 20,
   },
 ];
 

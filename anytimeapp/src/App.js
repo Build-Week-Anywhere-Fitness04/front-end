@@ -12,6 +12,12 @@ import PrivateRoute from "./components/PrivateRoute";
 import Home from "./components/Home";
 import { AuthProvider } from "./components/AuthContexts";
 
+
+// initialLoginErrors = {
+//   email: '',
+//   password: ''
+// }
+
 function App() {
   // const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
 
