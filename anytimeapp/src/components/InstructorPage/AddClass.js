@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import dummyData from '../../dummyData/dummyData'
 
-const initialClassFormValues = {
-    theClassName: '',
-    classType: '',
-    classStartTime: '',
-    classDuration: '',
-    classIntensity: '',
-    classLocation: '',
-    maxClassSize: 0,
-}
+
 
 
 export default function AddClass(props) {
 
-    const { classes, setClasses } = props
+    const { classes, setClasses, classFormValues, setClassFormValues, initialClassFormValues, isEditing, setIsEditing } = props
 
-    const [classFormValues, setClassFormValues] = useState(initialClassFormValues)
+   
     
 
     const classFormChange = evt => {
@@ -43,11 +35,11 @@ export default function AddClass(props) {
             maxClassSize: classFormValues.maxClassSize,
         }
 
-        console.log(newClass)
+        
         const updatedClasses = ([newClass, ...classes])
         setClasses(updatedClasses)
         setClassFormValues(initialClassFormValues)
-        console.log(classes)
+        
     }
 
     return (
@@ -156,12 +148,19 @@ export default function AddClass(props) {
             placeholder="What is the maximum class size?"
           />
         </div>
-        <button
+        {!isEditing ? <button
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
          Create Class!
-        </button>
+        </button> : 
+        <button
+        onClick={() => {setIsEditing(false)}}
+        type="submit"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+     Update Class!
+    </button>}
       </div>
       </form>
 
