@@ -3,21 +3,24 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { auth } from "./Firebase";
+import React from "react";
+import { useHistory } from "react-router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const logout = (e) => {
-  console.log("clicked");
-  // e.preventDefault();
-  auth.signOut().then((res) => {
-    console.log("User signed out");
-    e.history.push("/login");
-  });
-};
-
 export default function Nav() {
+  const history = useHistory();
+  const logout = (e) => {
+    console.log("clicked");
+    e.preventDefault();
+    auth.signOut().then(() => {
+      console.log("user signed out");
+      history.push("/login");
+    });
+  };
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
