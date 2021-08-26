@@ -40,10 +40,8 @@ export default function ClassList() {
 
   useEffect(() => {
     const fetchClasses = async () => {
-
       const response = db.collection('classes');
       const data = await response.get();
-
       data.docs.forEach(item => {
         setClasses([...classes, item.data()])
       })
