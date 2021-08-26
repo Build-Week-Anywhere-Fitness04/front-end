@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useAuth } from "./AuthContexts";
+import { auth } from "./Firebase";
 
 class Login extends React.Component {
   state = {
@@ -9,7 +10,6 @@ class Login extends React.Component {
       password: "",
     },
     error: false,
-    isTeacher: false,
   };
 
   handleChange = (e) => {
@@ -23,6 +23,17 @@ class Login extends React.Component {
 
   login = (e) => {
     e.preventDefault();
+    console.log(this.state.credentials);
+    auth
+      .signInWithEmailAndPassword(
+        this.state.credentials.username,
+        this.state.credentials.password
+      )
+      .then((res) => {
+        console.log(res.user);
+        this.props.history.push("/home");
+      });
+
     // if (this.state.credentials === "") {
     //   this.setState({
     //     error: "Username or Password are not valid. Please try again",

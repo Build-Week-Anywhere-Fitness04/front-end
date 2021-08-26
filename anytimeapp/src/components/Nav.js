@@ -8,12 +8,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const logout = () => {
+const logout = (e) => {
   console.log("clicked");
-  //   e.preventDefault();
-  auth.signOut().then(() => {
+  // e.preventDefault();
+  auth.signOut().then((res) => {
     console.log("User signed out");
-    this.props.history.push("/");
+    e.history.push("/login");
   });
 };
 
@@ -135,7 +135,7 @@ export default function Nav() {
                           {({ active }) => (
                             <a
                               href="#"
-                              onSubmit={logout}
+                              onClick={logout}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
