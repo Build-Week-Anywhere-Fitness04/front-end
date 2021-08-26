@@ -16,10 +16,18 @@ export default function Nav() {
     console.log("clicked");
     e.preventDefault();
     auth.signOut().then(() => {
-      console.log("user signed out");
+      // console.log("user signed out");
       history.push("/login");
     });
   };
+
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log("user logged in: ", user);
+    } else {
+      console.log("user logged out");
+    }
+  });
 
   return (
     <Disclosure as="nav" className="bg-gray-800">

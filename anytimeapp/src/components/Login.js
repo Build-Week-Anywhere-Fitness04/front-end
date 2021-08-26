@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useAuth } from "./AuthContexts";
-import { auth } from "./Firebase";
+import { auth, db } from "./Firebase";
 
 class Login extends React.Component {
   state = {
@@ -10,6 +10,7 @@ class Login extends React.Component {
       password: "",
     },
     error: false,
+    isInstructor: false,
   };
 
   handleChange = (e) => {
@@ -18,21 +19,28 @@ class Login extends React.Component {
         ...this.state.credentials,
         [e.target.name]: e.target.value,
       },
+      isIntructor: e.target.value,
     });
   };
 
   login = (e) => {
     e.preventDefault();
-    console.log(this.state.credentials);
+    // console.log(this.state.credentials);
     auth
       .signInWithEmailAndPassword(
         this.state.credentials.username,
         this.state.credentials.password
+        // this.state.isInstructor
       )
-      .then((res) => {
-        console.log(res.user);
+      .then(() => {
         this.props.history.push("/home");
       });
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("user logged in: ", user);
+      }
+    });
 
     // if (this.state.credentials === "") {
     //   this.setState({
@@ -60,8 +68,12 @@ class Login extends React.Component {
   render() {
     return (
       <h1>
-        <div className="flex flex-col justify-center min-h-screen py-12 bg-cover bg-gray-50 sm:px-6 lg:px-8" style={{ backgroundImage: `url(${'https://images.squarespace-cdn.com/content/56e487181d07c0743d227289/1580599661558-FI6JCNI15REZ265HY9R1/Canva+-+Modern+gym+interior+with+equipment.jpg?format=1500w&content-type=image%2Fjpeg'})` }}>
-
+        <div
+          className="flex flex-col justify-center min-h-screen py-12 bg-cover bg-gray-50 sm:px-6 lg:px-8"
+          style={{
+            backgroundImage: `url(${"https://images.squarespace-cdn.com/content/56e487181d07c0743d227289/1580599661558-FI6JCNI15REZ265HY9R1/Canva+-+Modern+gym+interior+with+equipment.jpg?format=1500w&content-type=image%2Fjpeg"})`,
+          }}
+        >
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
               <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -131,6 +143,8 @@ class Login extends React.Component {
                     id="instructor-box"
                     name="instructor-box"
                     type="checkbox"
+                    value={this.state.isInstructor}
+                    onChange={this.handleChange}
                     className="text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
                   />
                   <label
