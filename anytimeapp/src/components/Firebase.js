@@ -1,5 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import 'firebase/firestore';
+import 'firebase/storage';
 
 const app = firebase.initializeApp({
   apiKey: "AIzaSyAD4gmdGy-4Q6rXopZof82RAJ6lsJyV_iM",
@@ -8,9 +10,9 @@ const app = firebase.initializeApp({
 
   projectId: "anytimefitness-e873d",
 
-  // storageBucket: "anytimefitness-e873d.appspot.com",
+  storageBucket: "anytimefitness-e873d.appspot.com",
 
-  // messagingSenderId: "434349541037",
+  messagingSenderId: "434349541037",
 
   appId: "1:434349541037:web:dafdc2e6412bbb7eeae824",
 
@@ -18,4 +20,5 @@ const app = firebase.initializeApp({
 });
 
 export const auth = app.auth();
+export const db = firebase.firestore();
 export default app;
