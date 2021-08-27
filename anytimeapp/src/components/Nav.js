@@ -21,13 +21,13 @@ export default function Nav() {
     });
   };
 
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      console.log("user logged in: ", user);
-    } else {
-      console.log("user logged out");
-    }
-  });
+  // auth.onAuthStateChanged((user) => {
+  //   if (user) {
+  //     console.log("user logged in: ", user);
+  //   } else {
+  //     console.log("user logged out");
+  //   }
+  // });
 
   return (
     <Disclosure as="nav" className="bg-gray-800">

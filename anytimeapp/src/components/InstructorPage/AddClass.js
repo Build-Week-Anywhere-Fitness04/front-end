@@ -1,37 +1,51 @@
-import React, { useState } from 'react';
-import { storage } from '../Firebase';
+import React from "react";
 
-const initialClassFormValues = {
-  theClassName: '',
-  classType: '',
-  classStartTime: '',
-  classDuration: '',
-  classIntensity: '',
-  classLocation: '',
-  maxClassSize: 0,
-}
-
-
-
-export default function AddClass() {
-
-  const [classFormValues, setClassFormValues] = useState(initialClassFormValues)
-
-  const classFormChange = evt => {
-    const { name, value } = evt.target
+export default function AddClass(props) {
+  const {
+    classes,
+    setClasses,
+    classFormValues,
+    setClassFormValues,
+    initialClassFormValues,
+    isEditing,
+    setIsEditing,
+  } = props;
+  const classFormChange = (evt) => {
+    const { name, value } = evt.target;
     setClassFormValues({
       ...classFormValues,
-      [name]: value
-    })
-  }
-
+      [name]: value,
+    });
+  };
+  const classFormSubmit = (evt) => {
+    evt.preventDefault();
+    const newClass = {
+      id: classes.length + 1,
+      theClassName: classFormValues.theClassName.trim(),
+      classType: classFormValues.classType.trim(),
+      classStartTime: classFormValues.classStartTime.toString(),
+      classDuration: classFormValues.classDuration.toString(),
+      classIntensity: classFormValues.classIntensity,
+      classLocation: classFormValues.classLocation,
+      numberAttendees: 0,
+      maxClassSize: classFormValues.maxClassSize,
+    };
+    const updatedClasses = [newClass, ...classes];
+    setClasses(updatedClasses);
+    setClassFormValues(initialClassFormValues);
+  };
   return (
     <>
-      <h2 className="mb-4 mt-6 text-center text-3xl font-extrabold text-gray-900">Create a New Class</h2>
-      <form>
+      <h2 className="mb-4 mt-6 text-center text-3xl font-extrabold text-gray-900">
+        {!isEditing ? "Create a New Class" : "Update Class"}
+      </h2>
+      <form onSubmit={classFormSubmit}>
         <div className="isolate -space-y-px rounded-md shadow-sm w-1/3 mx-auto">
           <div className="relative border border-gray-300 rounded-md rounded-b-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="Class Name" className="block text-xs font-medium text-gray-700">
+            <label
+              htmlFor="Class Name"
+              className="block text-xs font-medium text-gray-700"
+            >
               Class Name
             </label>
             <input
@@ -45,7 +59,10 @@ export default function AddClass() {
             />
           </div>
           <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="Class Type" className="block w-full text-xs font-medium text-gray-700">
+            <label
+              htmlFor="Class Type"
+              className="block w-full text-xs font-medium text-gray-700"
+            >
               Type
             </label>
             <input
@@ -59,7 +76,10 @@ export default function AddClass() {
             />
           </div>
           <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="Class Start Time" className="block w-full text-xs font-medium text-gray-700">
+            <label
+              htmlFor="Class Start Time"
+              className="block w-full text-xs font-medium text-gray-700"
+            >
               Start Time
             </label>
             <input
@@ -73,7 +93,10 @@ export default function AddClass() {
             />
           </div>
           <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="Class Duration" className="block w-full text-xs font-medium text-gray-700">
+            <label
+              htmlFor="Class Duration"
+              className="block w-full text-xs font-medium text-gray-700"
+            >
               Duration
             </label>
             <input
@@ -87,7 +110,10 @@ export default function AddClass() {
             />
           </div>
           <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="Class Intensity" className="block w-full text-xs font-medium text-gray-700">
+            <label
+              htmlFor="Class Intensity"
+              className="block w-full text-xs font-medium text-gray-700"
+            >
               Intensity
             </label>
             <select
@@ -97,14 +123,17 @@ export default function AddClass() {
               id="classIntensity"
               className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
             >
-              <option value=''>Select Intensity</option>
-              <option value='Easy'>Easy</option>
-              <option value='Moderate'>Moderate</option>
-              <option value='Hard'>Hard</option>
+              <option value="">Select Intensity</option>
+              <option value="Easy">Easy</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Hard">Hard</option>
             </select>
           </div>
           <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="Class Location" className="block w-full text-xs font-medium text-gray-700">
+            <label
+              htmlFor="Class Location"
+              className="block w-full text-xs font-medium text-gray-700"
+            >
               Location
             </label>
             <input
@@ -118,7 +147,10 @@ export default function AddClass() {
             />
           </div>
           <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="Max Class Size" className="block w-full text-xs font-medium text-gray-700">
+            <label
+              htmlFor="Max Class Size"
+              className="block w-full text-xs font-medium text-gray-700"
+            >
               Class Capacity
             </label>
             <input
@@ -131,14 +163,26 @@ export default function AddClass() {
               placeholder="What is the maximum class size?"
             />
           </div>
-          <button
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Create Class!
-          </button>
+          {!isEditing ? (
+            <button
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Create Class!
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setIsEditing(false);
+              }}
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Update Class!
+            </button>
+          )}
         </div>
       </form>
     </>
-  )
+  );
 }

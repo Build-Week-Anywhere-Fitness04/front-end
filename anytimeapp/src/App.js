@@ -15,16 +15,12 @@ import { AuthProvider } from "./components/AuthContexts";
 import InstructorPage from "./components/InstructorPage/InstructorPage";
 import AddClass from "./components/InstructorPage/AddClass";
 
-
-
 function App() {
-  
-
-
   return (
     <AuthProvider>
       <Router>
         <Switch>
+          <Route path="/instructor" component={InstructorPage} />
           <Route path="/classes" component={AddClass} />
           <Route path="/Registration" component={Registration} />
           <Route path="/Home" component={Home} />

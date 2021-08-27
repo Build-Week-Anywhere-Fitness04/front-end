@@ -26,5 +26,5 @@ const userNavigation = [
 ];
 
 export default function InstructorHome() {
-  return <h1>Hello world</h1>;
+  return <h1>Hello Instructor</h1>;
 }

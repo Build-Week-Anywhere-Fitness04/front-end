@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { Fragment } from "react";
 // import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Nav from "./Nav";
@@ -65,22 +65,29 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// [userType, getUserType] = useState("");
+export default function Home() {
+  const [userType, setUserType] = useState("");
 
-export default function Home(props) {
   const fetchUser = async () => {
     const userResponse = db.collection("users");
-
-    const userData = await userResponse.get().then((res) => {
-      // console.log(res);
-      const ohGodPleaseWork = res._delegate.query._path.segments[0];
-
-      // console.log(ohGodPleaseWork);
-      return ohGodPleaseWork;
-    });
     console.log(userResponse);
-    return userResponse;
+    userResponse.get().then((res) => {
+      // console.log(res);
+      // const ohGodPleaseWork = res._delegate.query._path.segments[0].toString();
+      setUserType(res._delegate.query._path.segments[0].toString());
+      // console.log(userType);
+      // console.log(ohGodPleaseWork);
+      // return ohGodPleaseWork;
+    });
+    // setUserType(ohGodPleaseWork);
+    // console.log(userData);
   };
+
+  // console.log(userType, "usertype");
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <>
@@ -108,11 +115,7 @@ export default function Home(props) {
                     <div className="space-y-8 sm:space-y-0 sm:flex sm:justify-between sm:items-center xl:block xl:space-y-8">
                       {/* Profile */}
 
-                      {fetchUser() === "users" ? (
-                        <UserHome />
-                      ) : (
-                        <InstructorHome />
-                      )}
+                      <UserHome />
 
                       {/* <div>
                           <ul role="list" className="divide-y divide-gray-200">
