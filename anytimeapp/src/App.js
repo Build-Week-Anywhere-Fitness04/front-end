@@ -15,20 +15,11 @@ import { AuthProvider } from "./components/AuthContexts";
 import InstructorPage from "./components/InstructorPage/InstructorPage";
 import AddClass from "./components/InstructorPage/AddClass";
 
-// initialLoginErrors = {
-//   email: '',
-//   password: ''
-// }
+
 
 function App() {
-  // const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
+  
 
-  // const validate = (name, value) => {
-  //   yup.reach(schema, name)
-  //   .validate(value)
-  //   .then(() => setLoginErrors({ ...loginErrors, [name]: '' }))
-  //   .catch(err => setLoginErrors({ ...loginErrors, [name]: err.errors[0] }))
-  // }
 
   return (
     <AuthProvider>

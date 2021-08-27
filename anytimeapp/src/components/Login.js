@@ -2,6 +2,9 @@ import axios from "axios";
 import React from "react";
 import { useAuth } from "./AuthContexts";
 import { auth, db } from "./Firebase";
+import InstructorHome from "./HomeComponents/InstructorHome";
+import UserHome from "./HomeComponents/UserHome";
+import { storage } from "./Firebase";
 
 class Login extends React.Component {
   state = {
@@ -30,17 +33,14 @@ class Login extends React.Component {
       .signInWithEmailAndPassword(
         this.state.credentials.username,
         this.state.credentials.password
-        // this.state.isInstructor
       )
       .then(() => {
         this.props.history.push("/home");
       });
 
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log("user logged in: ", user);
-      }
-    });
+    // auth.onAuthStateChanged((user) => {
+    //   console.log(user);
+    // });
 
     // if (this.state.credentials === "") {
     //   this.setState({
