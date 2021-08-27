@@ -3,6 +3,7 @@ import "firebase/auth";
 import 'firebase/firestore';
 import 'firebase/storage';
 
+
 const app = firebase.initializeApp({
   apiKey: "AIzaSyAD4gmdGy-4Q6rXopZof82RAJ6lsJyV_iM",
 
@@ -19,8 +20,10 @@ const app = firebase.initializeApp({
   measurementId: "G-2S3N7SBTQN",
 });
 
-export const auth = app.auth();
-export const db = firebase.firestore();
-export const storage = firebase.storage();
+export const auth = app.auth(); // authentication object and methods
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider(); // creates an instance of the google auth provider object that can be used to log in 
+export const db = firebase.firestore(); // firestore collection object and methods - text data access
+export const storage = firebase.storage(); // storage access for file upload data
+
 
 export default app;

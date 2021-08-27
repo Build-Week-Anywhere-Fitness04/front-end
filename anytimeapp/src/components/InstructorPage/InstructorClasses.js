@@ -30,15 +30,3 @@ export default function InstructorClasses({ classes, setClasses }) {
   );
 }
 
-{
-  /* {
-    theClassName: "Moderate Weight Training",
-    classType: "Weight Training",
-    classStartTime: "9:00 AM",
-    classDuration: "45",
-    classIntensity: "Moderate",
-    classLocation: "GymC",
-    numberAttendees: 12,
-    maxClassSize: 20,
-  }, */
-}
